@@ -1,0 +1,29 @@
+* SPICE3 file created from cmos_scmos.ext - technology: scmos
+
+
+.model pfet pmos level=49 version=3.3.0
+.model nfet nmos level=49 version=3.3.0
+
+.option scale=1u
+
+M1000 vout vin vdd vdd pfet w=10 l=2
++  ad=100p pd=40u as=100p ps=40u
+M1001 vout vin gnd Gnd nfet w=5 l=2
++  ad=50p pd=30u as=50p ps=30u
+C0 vout 0 4f 
+C1 vin 0 8f 
+
+
+v1 vdd gnd 1.8
+vin vin gnd pulse(0 1.8 5n 1n 1n 20n 50n)
+.tran 5n 250n
+.control
+run
+plot V(vin) V(vout)
+
+
+.endc
+.end
+
+
+
